@@ -37,17 +37,18 @@ class DeliveryTest {
         $("[data-test-id=date] input").sendKeys(Keys.DELETE);
         if (!generateDate(addDaysDefault, "MM").equals(generateDate(addDays, "MM"))) {
             $("[data-step='1']").click();
-            $$(".calendar__day").findBy(text(generateDate(addDays, "d"))).click();
-
-            $("[data-test-id=name] input").setValue(validUser.getName());
-            $("[data-test-id=phone] input").setValue(validUser.getPhone());
-            $("[data-test-id=agreement]").click();
-            $x("//*[contains(text(),'Забронировать')]").click();
-            $(".notification__content")
-                    .shouldBe(Condition.visible, Duration.ofSeconds(15))
-                    .shouldHave(Condition.exactText("Встреча успешно забронирована на " + generateDate(addDays, "dd.MM.yyyy")));
-
+        } else {
         }
+        $$(".calendar__day").findBy(text(generateDate(addDays, "d"))).click();
+
+        $("[data-test-id=name] input").setValue(validUser.getName());
+        $("[data-test-id=phone] input").setValue(validUser.getPhone());
+        $("[data-test-id=agreement]").click();
+        $x("//*[contains(text(),'Забронировать')]").click();
+        $(".notification__content")
+                .shouldBe(Condition.visible, Duration.ofSeconds(15))
+                .shouldHave(Condition.exactText("Встреча успешно забронирована на " + generateDate(addDays, "dd.MM.yyyy")));
+
 
     }
 
